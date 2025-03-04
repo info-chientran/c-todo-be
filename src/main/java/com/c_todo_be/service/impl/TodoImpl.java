@@ -8,7 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -22,7 +24,11 @@ public class TodoImpl implements TodoService {
     public ResponseEntity<?> save(Todo todo) {
         try {
             todoRepository.save(todo);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Created");
+            Map<String, Object> res = new HashMap<>();
+            res.put("message", "Created");
+            res.put("todo", todo);
+
+            return ResponseEntity.status(HttpStatus.CREATED).body(res);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
         }
@@ -49,7 +55,11 @@ public class TodoImpl implements TodoService {
                 updatedTodo.setCompleted(todo.isCompleted());
 
                 Todo savedTodo = todoRepository.save(updatedTodo);
-                return ResponseEntity.ok(savedTodo);
+                Map<String, Object> res = new HashMap<>();
+                res.put("message", "Updated");
+                res.put("todo", savedTodo);
+
+                return ResponseEntity.ok(res);
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Todo not found with id: " + id);
             }
@@ -59,8 +69,12 @@ public class TodoImpl implements TodoService {
     }
 
     @Override
-    public ResponseEntity<?> deleteById(Long todoId) {
-        todoRepository.deleteById(todoId);
-        return ResponseEntity.status(HttpStatus.OK).body("Deleted");
+    public ResponseEntity<?> deleteById(Long id) {
+        todoRepository.deleteById(id);
+        Map<String, Object> res = new HashMap<>();
+        res.put("message", "Deleted");
+        res.put("id", id);
+
+        return ResponseEntity.status(HttpStatus.OK).body(res);
     }
 }
