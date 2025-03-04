@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class CTodoBeApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(CTodoBeApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(CTodoBeApplication.class, args);
+    }
 
 }

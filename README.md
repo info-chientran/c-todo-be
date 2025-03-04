@@ -8,4 +8,5 @@ Database: MySQL 8.4.4
 
 ## Features
 
+- [x] CRUD todo
 - [ ] CRUD user
