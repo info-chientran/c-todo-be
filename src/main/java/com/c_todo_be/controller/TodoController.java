@@ -26,7 +26,7 @@ public class TodoController {
         return todoService.select();
     }
 
-    @PostMapping("/todo/{id}")
+    @PutMapping("/todo/{id}")
     public ResponseEntity<?> updateById(@PathVariable("id") Long id, @RequestBody Todo todo) {
         return todoService.updateById(id, todo);
     }
